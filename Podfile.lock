@@ -1,0 +1,63 @@
+PODS:
+  - Alamofire (5.7.1)
+  - IQKeyboardManagerSwift (6.5.11)
+  - LZViewPager (1.2.8):
+    - SnapKit (~> 5.6.0)
+  - SDWebImage (5.15.8):
+    - SDWebImage/Core (= 5.15.8)
+  - SDWebImage/Core (5.15.8)
+  - SemiModalViewController (1.0.1)
+  - SideMenu (6.5.0)
+  - SimpleImageViewer (1.1.1)
+  - SnapKit (5.6.0)
+  - SPPermissions/Camera (5.5.8):
+    - SPPermissions/Core
+  - SPPermissions/Core (5.5.8)
+  - SPPermissions/Location (5.5.8):
+    - SPPermissions/Core
+  - SwiftGifOrigin (1.7.0)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.4)
+  - IQKeyboardManagerSwift
+  - LZViewPager (~> 1.2.5)
+  - SDWebImage
+  - SemiModalViewController
+  - SideMenu
+  - SimpleImageViewer
+  - SPPermissions/Camera
+  - SPPermissions/Location
+  - SwiftGifOrigin
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - IQKeyboardManagerSwift
+    - LZViewPager
+    - SDWebImage
+    - SemiModalViewController
+    - SideMenu
+    - SimpleImageViewer
+    - SnapKit
+    - SPPermissions
+    - SwiftGifOrigin
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  LZViewPager: 832bd177210060e1282b67aa1e9cd201ded67a5b
+  SDWebImage: cb032eba469c54e0000e78bcb0a13cdde0a52798
+  SemiModalViewController: 13fe8b991b501c7cd6a9ec7c782ed7a5c72c12e6
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SPPermissions: 77d05b0b8489f4c3faefa47317d5af0179c2bfd1
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: beebc4bc7ddc055e901b1d7484c2c7da3a7a9acd
+
+COCOAPODS: 1.12.0

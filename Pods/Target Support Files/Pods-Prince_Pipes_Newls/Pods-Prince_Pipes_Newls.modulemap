@@ -1,0 +1,6 @@
+framework module Pods_Prince_Pipes_Newls {
+  umbrella header "Pods-Prince_Pipes_Newls-umbrella.h"
+
+  export *
+  module * { export * }
+}
