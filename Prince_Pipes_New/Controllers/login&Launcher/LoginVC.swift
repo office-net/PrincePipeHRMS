@@ -45,6 +45,10 @@ class LoginVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         let id  = UIDevice.current.identifierForVendor!.uuidString
         self.deviceid = id
+        txt_pass.layer.cornerRadius = 5
+        txt_empcode.layer.cornerRadius = 5
+        txt_pass.layer.borderWidth = 1
+        txt_empcode.layer.borderWidth = 1
         
         
         if let Language = UserDefaults.standard.string(forKey: "Language") {

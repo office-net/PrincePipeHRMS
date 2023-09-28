@@ -10,15 +10,8 @@ import SemiModalViewController
 import Alamofire
 import SwiftyJSON
 
-class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource,SecondViewControllerDelegate{
-    func didPopFromSecondViewController() {
-        
-        DispatchQueue.main.async
-        {
-            self.NotesAPI()
-            self.tableView.reloadData()
-        }
-    }
+class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource{
+   
     
     
     
@@ -34,14 +27,24 @@ class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource,Seco
     override func viewDidLoad() {
         super.viewDidLoad()
         btn_home.isHidden = true
-        view_home.isHidden =  true
-        NotesAPI()
-        
-        
-        
+        view_home.isHidden = true
+        tableView.delegate = self
+        tableView.dataSource = self
+       
+       
     }
 
-    
+   
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Call the API to fetch data when the view is about to appear
+        NotesAPI()
+    }
+    func reloadData() {
+        // Reload the table view data here
+        self.tableView.reloadData()
+    }
     
     @IBAction func btn_Home(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -81,13 +84,11 @@ class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource,Seco
                     if status == 1
                     {
                         CustomActivityIndicator.sharedInstance.hideActivityIndicator(uiView: self.view)
-                        
-                            self.tableView.reloadData()
-                        
-                    }
+                        self.reloadData()
+                                            }
                     else{
-                        self.tableView.isHidden = true
-                        CustomActivityIndicator.sharedInstance.hideActivityIndicator(uiView: self.view)
+                        self.reloadData()
+                                               CustomActivityIndicator.sharedInstance.hideActivityIndicator(uiView: self.view)
                         let msg  =  self.responseJson["Message"].stringValue
                         self.showAlert(message: msg)
                     }
@@ -97,72 +98,119 @@ class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource,Seco
             }
         
     }
-    func MyPage_DailyNotesDeleteAPI(notesID:String)
-    {
-        
-        var parameters:[String:Any]?
-       
-            parameters =  ["TokenNo":"abcHkl7900@8Uyhkj","NotesID":notesID]
-      
-        AF.request( base.url+"MyPage_DailyNotesDelete", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseDecodable(of:JSON.self)  { response in
+//    func MyPage_DailyNotesDeleteAPI(notesID:String)
+//    {
+//
+//        var parameters:[String:Any]?
+//
+//            parameters =  ["TokenNo":"abcHkl7900@8Uyhkj","NotesID":notesID]
+//
+//        AF.request( base.url+"MyPage_DailyNotesDelete", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+//            .responseDecodable(of:JSON.self)  { response in
+//                print(response.request!)
+//                print(parameters!)
+//                switch response.result
+//                {
+//
+//                case .success(let value):
+//
+//                    self.responseJson =  JSON(value)
+//                    print(self.responseJson)
+//
+//                    let status = self.responseJson["Status"].intValue
+//                    if status == 1 {
+//
+//                        let Message = self.responseJson["Message"].stringValue
+//                        // Create the alert controller
+//                        let alertController = UIAlertController(title: base.Title, message: Message, preferredStyle: .alert)
+//
+//
+//                        // Create the actions
+//                        let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
+//                            UIAlertAction in
+//                            self.reloadData()
+//
+//                            self.responseJson.dictionaryObject?.removeValue(forKey: "\(self.senderTag)")
+//
+//                        }
+//                        // Add the actions
+//                        alertController.addAction(okAction)
+//                        // Present the controller
+//                        DispatchQueue.main.async {
+//
+//                            self.present(alertController, animated: true)
+//                        }
+//
+//                    }else {
+//
+//                        let Message = self.responseJson["Message"].stringValue
+//                        // Create the alert controller
+//                        let alertController = UIAlertController(title: base.Title, message: Message, preferredStyle: .alert)
+//
+//                        // Create the actions
+//                        let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
+//                            UIAlertAction in
+//                            self.reloadData()
+//                        }
+//                        // Add the actions
+//                        alertController.addAction(okAction)
+//                        // Present the controller
+//                        DispatchQueue.main.async {
+//                            self.present(alertController, animated: true)
+//                        }
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//
+//            }
+//
+//    }
+    func MyPage_DailyNotesDeleteAPI(notesID: String) {
+        let parameters: [String: Any] = ["TokenNo": "abcHkl7900@8Uyhkj", "NotesID": notesID]
+
+        AF.request(base.url + "MyPage_DailyNotesDelete", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseDecodable(of: JSON.self) { [weak self] response in
+                guard let self = self else { return }
                 print(response.request!)
-                print(parameters!)
-                switch response.result
-                {
-                    
+                print(parameters)
+                switch response.result {
                 case .success(let value):
-                    
-                    self.responseJson =  JSON(value)
-                    print(self.responseJson)
-                    
-                    let status = self.responseJson["Status"].intValue
+                    let responseJson = JSON(value)
+                    print(responseJson)
+                    let status = responseJson["Status"].intValue
                     if status == 1 {
-                        
-                        let Message = self.responseJson["Message"].stringValue
+                        let Message = responseJson["Message"].stringValue
+
+                        // Update the local data source
+                        self.responseJson["DailyNotesList"].arrayObject?.remove(at: self.senderTag)
+
+                        // Reload the table view to reflect the deleted note
+                        self.tableView.reloadData()
+
                         // Create the alert controller
                         let alertController = UIAlertController(title: base.Title, message: Message, preferredStyle: .alert)
-                        
+
                         // Create the actions
-                        let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
-                            UIAlertAction in
-                            
-                            self.responseJson.dictionaryObject?.removeValue(forKey: "\(self.senderTag)")
-                            self.NotesAPI()
-                        }
+                        let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default, handler: nil)
+                        
                         // Add the actions
                         alertController.addAction(okAction)
-                        // Present the controller
-                        DispatchQueue.main.async {
-                            
-                            self.present(alertController, animated: true)
-                        }
                         
-                    }else {
-                        
-                        let Message = self.responseJson["Message"].stringValue
-                        // Create the alert controller
-                        let alertController = UIAlertController(title: base.Title, message: Message, preferredStyle: .alert)
-                        
-                        // Create the actions
-                        let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
-                            UIAlertAction in
-                            self.tableView.reloadData()
-                        }
-                        // Add the actions
-                        alertController.addAction(okAction)
                         // Present the controller
                         DispatchQueue.main.async {
                             self.present(alertController, animated: true)
                         }
+                    } else {
+                        let Message = responseJson["Message"].stringValue
+                        self.showAlert(message: Message)
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-                
             }
-        
     }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -186,16 +234,22 @@ class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource,Seco
         
         return cell
     }
-    @objc func btn_Delete(sender : UIButton){
-      
+    @objc func btn_Delete(sender: UIButton) {
         print(sender.tag)
         senderTag = sender.tag
-        
+
         let notesId = self.responseJson["DailyNotesList"][senderTag]["NotesID"].stringValue
+
+        // Call the API to delete the note
         MyPage_DailyNotesDeleteAPI(notesID: notesId)
-        
-        
     }
+
+  
+
+
+
+
+
     
     @IBAction func btn_addChild(_ sender: Any) {
         
@@ -206,11 +260,12 @@ class NotesVC: UIViewController , UITableViewDelegate,UITableViewDataSource,Seco
         ]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pvc = storyboard.instantiateViewController(withIdentifier: "Notes_childVC") as! Notes_childVC
+        pvc.delegate = self
         
         pvc.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 520)
         
         pvc.modalPresentationStyle = .overCurrentContext
-        pvc.delegate = self
+      
         presentSemiViewController(pvc, options: options, completion: {
             print("Completed!")
         }, dismissBlock: {
@@ -247,4 +302,12 @@ class notetblcell : UITableViewCell
     }
     
 }
-
+extension NotesVC: SecondViewControllerDelegate {
+    func didPopFromSecondViewController() {
+        // This method will be called when the child view controller is dismissed
+        // Reload the table view data here
+   
+        self.NotesAPI()
+        print("add ho raha ha kya ")
+    }
+}

@@ -14,7 +14,9 @@ protocol SecondViewControllerDelegate: AnyObject {
 }
 class Notes_childVC: UIViewController {
     
+    
     @IBOutlet weak var txt_description: UITextField!
+    @IBOutlet weak var addNoteLbl: UILabel!
     weak var delegate: SecondViewControllerDelegate?
     
     
@@ -37,7 +39,11 @@ class Notes_childVC: UIViewController {
         
         let placeholder2 = txt_description.placeholder ?? "" //There should be a placeholder set in storyboard or elsewhere string or pass empty
         txt_description.attributedPlaceholder = NSAttributedString(string: placeholder2, attributes: [NSAttributedString.Key.foregroundColor : color])
-        
+        let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
+            UIAlertAction in
+            self.dismissSemiModalView()
+            self.delegate?.didPopFromSecondViewController()
+        }
         
         
         
@@ -59,9 +65,10 @@ class Notes_childVC: UIViewController {
             .responseDecodable(of:JSON.self)  { response in
                 print(response.request!)
                 print(parameters!)
+               
                 switch response.result
                 {
-                    
+                   
                 case .success(let value):
                     
                     self.json =  JSON(value)
@@ -73,9 +80,10 @@ class Notes_childVC: UIViewController {
                         let alertController = UIAlertController(title: base.Title, message: Message, preferredStyle: .alert)
                         let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
                             UIAlertAction in
-                            
                             self.dismissSemiModalView()
                             self.delegate?.didPopFromSecondViewController()
+                            
+                            
                         }
                         alertController.addAction(okAction)
                         DispatchQueue.main.async {
@@ -94,22 +102,23 @@ class Notes_childVC: UIViewController {
                 
                 
             }
+       
         
         
         
         
     }
+   
     
     @IBAction func btn_save(_ sender: Any) {
-        if txt_description.text == ""
-        {
+        if txt_description.text == "" {
             self.showAlert(message: "Please Enter Note")
-        }
-        else
-        {
+        } else {
             AddNoteAPI()
+            //self.delegate?.didPopFromSecondViewController()
         }
-        
-        
     }
+
+
+
 }
