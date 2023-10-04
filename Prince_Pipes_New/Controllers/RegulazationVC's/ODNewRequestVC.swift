@@ -324,10 +324,10 @@ extension ODNewRequestVC:UITextFieldDelegate
                 OD_SubmitRequestAPI()
             } else if result == .orderedDescending {
                 self.txtFromTime.text = ""
-                self.showAlert(message: "From Time Should be less then To Time")
+                self.showAlert(message: "From Time Should be less than To Time")
             } else {
                 self.txtFromTime.text = ""
-                self.showAlert(message: "From Time Should be less then To Time")
+                self.showAlert(message: "From Time Should be less than To Time")
             }
         }
       
