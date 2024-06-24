@@ -173,6 +173,10 @@ class LoginVC: UIViewController {
                         let Attendanceinput = json["AttendanceInput"].stringValue
                         UserDefaults.standard.set(Attendanceinput, forKey: "AttendanceInput")
                         
+                        let  ChangePWDDATE = json["ChangePwdDate"].stringValue
+                        
+                        UserDefaults.standard.set(ChangePWDDATE, forKey: "ChangePWDDate")
+                        
                         let  Designation = json["Designation"].stringValue
                         UserDefaults.standard.set(Designation, forKey: "Designation") //setObject
                         
@@ -285,13 +289,19 @@ class LoginVC: UIViewController {
                         
                         UserDefaults.standard.set("True", forKey: "IsLogin") //setObject
                         
-                        DispatchQueue.main.async {
-                            
-                            
-                            self.SendToHome()
-                            
-                            
+                        if json["ChangePwdDate"].stringValue == "" {
+                            print("calkndalsbfdffnjdnfjjfnffnjnf")
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                   let mainTabBarController = storyboard.instantiateViewController(identifier: "ChangePasswordVC")
+                                   (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
                         }
+                        else {
+                            print("No Need to change Password")
+                            DispatchQueue.main.async {
+                                self.SendToHome()
+                            }
+                        }
+                       
                     }
                     else{
                         

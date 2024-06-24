@@ -16,7 +16,7 @@ class base
     static var cancel = ""
     static var yes = ""
     static var alertname = Title
-    static let url = "http://hrms.princepipes.com/MobileAPI/AppServices.svc/"
+    static let url = "https://hrms.princepipes.com/MobileAPI/AppServices.svc/"
     //"http://182.72.156.154/MobileAPI/AppServices.svc/"
     //https://kalstree.officenet.in/MobileAPI/AppServices.svc/
     

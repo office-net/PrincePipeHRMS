@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B0A96532C2592880097AE83 /* COPendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A96522C2592880097AE83 /* COPendingVC.swift */; };
+		0B0A96552C2592930097AE83 /* CODetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A96542C2592930097AE83 /* CODetailsVC.swift */; };
 		0B39FBEF2A7CBB9600970111 /* FlotingText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B39FBEE2A7CBB9600970111 /* FlotingText.swift */; };
 		0B3DC5972A9465A400841F4C /* SalaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DC5962A9465A400841F4C /* SalaryVC.swift */; };
 		0B3DC5AD2A985E6400841F4C /* ShortLeaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DC5AC2A985E6400841F4C /* ShortLeaveVC.swift */; };
@@ -86,6 +88,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B0A96522C2592880097AE83 /* COPendingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = COPendingVC.swift; sourceTree = "<group>"; };
+		0B0A96542C2592930097AE83 /* CODetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CODetailsVC.swift; sourceTree = "<group>"; };
 		0B39FBEE2A7CBB9600970111 /* FlotingText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlotingText.swift; sourceTree = "<group>"; };
 		0B3DC5962A9465A400841F4C /* SalaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalaryVC.swift; sourceTree = "<group>"; };
 		0B3DC5AC2A985E6400841F4C /* ShortLeaveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortLeaveVC.swift; sourceTree = "<group>"; };
@@ -199,6 +203,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B0A96562C2592A50097AE83 /* CommOff */ = {
+			isa = PBXGroup;
+			children = (
+				0B0A96542C2592930097AE83 /* CODetailsVC.swift */,
+				0B0A96522C2592880097AE83 /* COPendingVC.swift */,
+			);
+			path = CommOff;
+			sourceTree = "<group>";
+		};
 		0B3DC5AB2A985E4700841F4C /* Short Leave */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +228,7 @@
 		0B66F70729262F3400C13F52 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B0A96562C2592A50097AE83 /* CommOff */,
 				0B3DC5AB2A985E4700841F4C /* Short Leave */,
 				0BA46CFC29F1492000A9FEC4 /* DummyNotes */,
 				0BCAE349295AD13B007FF7E8 /* Gallery */,
@@ -616,6 +630,7 @@
 				0B69B7C729235EAD00002493 /* NetworkCheck.swift in Sources */,
 				0BC89E2C2926389B0001ABE7 /* RegulazationDetailsVC.swift in Sources */,
 				0B7010F5294841AD006FE03A /* BirthdayWishVC.swift in Sources */,
+				0B0A96552C2592930097AE83 /* CODetailsVC.swift in Sources */,
 				0BC89E2B2926389B0001ABE7 /* RegulazationVC.swift in Sources */,
 				0B66F71329262F7C00C13F52 /* ArchiveDetailsVC.swift in Sources */,
 				0BCAE348295AC798007FF7E8 /* HolidayVC.swift in Sources */,
@@ -640,6 +655,7 @@
 				0BC89E8E292654F00001ABE7 /* CalenderViewController.m in Sources */,
 				0B69B7C529235EAD00002493 /* CustomExtensions.swift in Sources */,
 				0BB607772924927A0051E61A /* AlertVc.swift in Sources */,
+				0B0A96532C2592880097AE83 /* COPendingVC.swift in Sources */,
 				0B3DC5972A9465A400841F4C /* SalaryVC.swift in Sources */,
 				0B66F71129262F7C00C13F52 /* LeaveBalanceVC.swift in Sources */,
 				0B69B7BD29235B1800002493 /* LoginVC.swift in Sources */,

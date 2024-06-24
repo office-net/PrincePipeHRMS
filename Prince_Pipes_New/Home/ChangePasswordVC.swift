@@ -107,6 +107,7 @@ extension ChangePasswordVC
                 let okAction = UIAlertAction(title: base.ok, style: UIAlertAction.Style.default) {
                     UIAlertAction in
                     self.navigationController?.popViewController(animated: true)
+                    self.pushToLoginVc()
                 }
                 alertController.addAction(okAction)
                 DispatchQueue.main.async {
@@ -119,5 +120,11 @@ extension ChangePasswordVC
             }
             
         }
+    }
+    func pushToLoginVc()
+    {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
     }
 }

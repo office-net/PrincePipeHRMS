@@ -50,8 +50,8 @@ class AlertVc: UIViewController,UITableViewDelegate,UITableViewDataSource {
         {
             self.showAlert(message: "There Is No Request Found")        }
         else {
-//            let vc =  storyboard?.instantiateViewController(withIdentifier: "SLPendingVC") as! SLPendingVC
-//            self.navigationController?.pushViewController(vc, animated: true)
+            let vc =  storyboard?.instantiateViewController(withIdentifier: "SL_Pending") as! SL_Pending
+            self.navigationController?.pushViewController(vc, animated: true)
         }}
         else
         {
@@ -59,7 +59,7 @@ class AlertVc: UIViewController,UITableViewDelegate,UITableViewDataSource {
            {
                self.showAlert(message: "There Is No Request Found")        }
            else {
-               let vc =  storyboard?.instantiateViewController(withIdentifier: "SL_Pending") as! SL_Pending
+               let vc =  storyboard?.instantiateViewController(withIdentifier: "COPendingVC") as! COPendingVC
                self.navigationController?.pushViewController(vc, animated: true)
            }
         }

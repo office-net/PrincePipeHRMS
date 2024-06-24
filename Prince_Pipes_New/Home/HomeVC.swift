@@ -185,6 +185,20 @@ class HomeVC: UIViewController ,UICollectionViewDelegate,UICollectionViewDataSou
                 print(self.imgaray)
                 self.pageControl.numberOfPages = self.imgaray.count
                 self.pageControl.currentPage = 0
+               
+                let checkUser = UserDefaults.standard.object(forKey: "ChangePWDDate") as? String
+                print("changepwdPass ====>>>>> \(String(describing: checkUser))")
+                if json["ChangePwdDate"].stringValue == checkUser && json["ActiveUserStatus"].boolValue == true {
+                   print("ChangePwdDate is match =====>>>> ")
+                }
+                else{
+                    print("ChangePwdDate is not match =====>>>> ")
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainTabBarController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+                }
+                
+                
                 
                 DispatchQueue.main.async {
                     self.timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
