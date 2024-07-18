@@ -779,7 +779,7 @@ else
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSURL * url = [NSURL URLWithString:[ NSString stringWithFormat:@"http://hrms.princepipes.com/MobileAPI/AppServices.svc/GetMyAttendance"]];;
+    NSURL * url = [NSURL URLWithString:[ NSString stringWithFormat:@"https://hrms.princepipes.com/MobileAPI/AppServices.svc/GetMyAttendance"]];;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
