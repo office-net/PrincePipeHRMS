@@ -39,8 +39,47 @@ class Networkmanager
            
         }
     }
+    class func postRequestWithAlert(controller:UIViewController,vv:UIView,remainingUrl:String, parameters: [String:Any], completion: @escaping ((_ data: JSON, _ responseData:Foundation.Data) -> Void)) {
+        CustomActivityIndicator.sharedInstance.showActivityIndicator(uiView: vv)
+        
+        
+        print("parameters posted : ",parameters)
+        let completeUrl = base.url + remainingUrl
+        print ("complete url : ", completeUrl)
+        
+        AF.request(completeUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseDecodable(of:JSON.self) { response in
+                
+                guard let data = response.data else { return }
+                
+                switch response.result
+                {
+                case .success(let value):
+                    CustomActivityIndicator.sharedInstance.hideActivityIndicator(uiView: vv)
+                    
+                    let swiftyJsonVar = JSON(value)
+                    //print(swiftyJsonVar)
+                    completion(swiftyJsonVar, data)
+                    
+                case.failure(let error):
+                    print(error.localizedDescription)
+                    CustomActivityIndicator.sharedInstance.hideActivityIndicator(uiView: vv)
+                    let alertController = UIAlertController(title: "Patanjali", message: "Internal Server Error", preferredStyle: UIAlertController.Style.alert)
+
+                    controller.present(alertController, animated: true, completion: nil)
+
+                    let timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { timer in
+                        alertController.dismiss(animated: true, completion: nil)
+                    }
+                }
+                
+            }
+    }
+    
       
 }
+
+
 
 class Networkmanager2
 {

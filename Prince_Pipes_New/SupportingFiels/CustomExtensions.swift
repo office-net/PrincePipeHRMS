@@ -110,6 +110,144 @@ extension UITextField
       }
   
 }
+
+
+
+extension UITextField
+{
+    func Set_DatePicker_With_Range(target: Any, selector: Selector,FromDate:String,Todate:String) {
+          // Create a UIDatePicker object and assign to inputView
+          let screenWidth = UIScreen.main.bounds.width
+          let datePicker = UIDatePicker()
+          if #available(iOS 13.4, *) {
+              datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+          } else {
+              // Fallback on earlier versions
+          }
+          datePicker.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 200, width: self.frame.size.width, height: 200)//1
+          datePicker.datePickerMode = .date //2
+          self.inputView = datePicker //3
+         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let FromDateString = FromDate
+        let ToDateString = Todate
+        let minimumDate = dateFormatter.date(from: FromDateString)
+        let maximumDate = dateFormatter.date(from: ToDateString)
+        datePicker.minimumDate = minimumDate
+        datePicker.maximumDate  =  maximumDate
+
+          let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 45.0)) //4
+          let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //5
+          let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel)) // 6
+          let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector) //7
+          toolBar.setItems([cancel, flexible, barButton], animated: false) //8
+          self.inputAccessoryView = toolBar //9
+      }
+    
+    func Set_DatePicker_With_From_date(target: Any, selector: Selector,FromDate:String) {
+          // Create a UIDatePicker object and assign to inputView
+          let screenWidth = UIScreen.main.bounds.width
+          let datePicker = UIDatePicker()
+          if #available(iOS 13.4, *) {
+              datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
+          } else {
+              // Fallback on earlier versions
+          }
+          datePicker.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 200, width: self.frame.size.width, height: 200)//1
+          datePicker.datePickerMode = .date //2
+          self.inputView = datePicker //3
+         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let FromDateString = FromDate
+    
+        let minimumDate = dateFormatter.date(from: FromDateString)
+      //  print(minimumDate!)
+        datePicker.minimumDate = minimumDate
+        
+      
+
+          let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 45.0)) //4
+          let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //5
+          let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel)) // 6
+          let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector) //7
+          toolBar.setItems([cancel, flexible, barButton], animated: false) //8
+          self.inputAccessoryView = toolBar //9
+      }
+    
+    
+    func set_TimePicker_With_TimeRange(target: Any, selector: Selector, startTime: String, endTime: String) {
+        let screenWidth = UIScreen.main.bounds.width
+        let datePicker = UIDatePicker()
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Handle older iOS versions here if needed
+            datePicker.datePickerMode = .time
+        }
+        
+        datePicker.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 200, width: self.frame.size.width, height: 200)
+        datePicker.locale = Locale(identifier: "en_GB")
+        datePicker.datePickerMode = .time
+        
+        //let dateFormatter = DateFormatter()
+        Formatter.time.defaultDate = Calendar.current.startOfDay(for: Date())
+        let minimumDate = Formatter.time.date(from: startTime)!
+            let maximumDate = Formatter.time.date(from: endTime)!
+        datePicker.date = minimumDate
+        datePicker.datePickerMode = .time
+       
+        datePicker.minimumDate = minimumDate
+        datePicker.maximumDate = maximumDate
+        
+        self.inputView = datePicker
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 44.0))
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel))
+        let done = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector)
+        
+        toolBar.setItems([cancel, flexible, done], animated: false)
+        self.inputAccessoryView = toolBar
+    }
+    
+    func set_TimePicker_With_TimeRange_From(target: Any, selector: Selector, startTime: String) {
+        let screenWidth = UIScreen.main.bounds.width
+        let datePicker = UIDatePicker()
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Handle older iOS versions here if needed
+            datePicker.datePickerMode = .time
+        }
+        
+        datePicker.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 200, width: self.frame.size.width, height: 200)
+        datePicker.locale = Locale(identifier: "en_GB")
+        datePicker.datePickerMode = .time
+        
+        //let dateFormatter = DateFormatter()
+        Formatter.time.defaultDate = Calendar.current.startOfDay(for: Date())
+        let minimumDate = Formatter.time.date(from: startTime)!
+        datePicker.date = minimumDate
+        datePicker.datePickerMode = .time
+       
+        datePicker.minimumDate = minimumDate
+     
+        
+        self.inputView = datePicker
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 44.0))
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel))
+        let done = UIBarButtonItem(title: "Done", style: .plain, target: target, action: selector)
+        
+        toolBar.setItems([cancel, flexible, done], animated: false)
+        self.inputAccessoryView = toolBar
+    }
+
+
+}
 extension Date {
     
     static func datee (lhs: Date, rhs: Date) -> TimeInterval {
@@ -349,3 +487,11 @@ extension String
 
 
 
+extension Formatter {
+    static let time: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .init(identifier: "em_US_POSIX")
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+}

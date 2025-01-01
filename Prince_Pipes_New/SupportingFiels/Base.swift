@@ -27,7 +27,17 @@ class base
     static let secondcolor = UIColor.darkGray
     static let firstcolor = #colorLiteral(red: 0.9294117647, green: 0.1960784314, blue: 0.2156862745, alpha: 1)
 
-
+    static func changeImageDropdown(textField:UITextField)
+    {
+        if let myImage = UIImage(named: "dropDown")
+        {
+            
+            textField.withImage(direction: .Right, image: myImage, colorBorder: UIColor.clear)
+            textField.cornerRadius = 5
+            textField.borderWidth = 1
+            textField.borderColor = UIColor.black
+        }
+    }
     static func changeImageCalender(textField:UITextField)
     {
         if let myImage = UIImage(named: "calendar")
@@ -168,3 +178,6 @@ class Validation {
         return isValidateOtherString
     }
 }
+
+
+
